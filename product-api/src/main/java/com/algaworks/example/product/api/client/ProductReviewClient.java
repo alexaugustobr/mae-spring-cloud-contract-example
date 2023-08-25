@@ -1,4 +1,6 @@
-package com.algaworks.example.product.api;
+package com.algaworks.example.product.api.client;
+
+import com.algaworks.example.product.api.model.ReviewModel;
 
 import java.util.List;
 

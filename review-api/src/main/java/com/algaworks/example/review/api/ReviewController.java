@@ -20,4 +20,10 @@ public class ReviewController {
 	public List<Review> findByProduct(@PathVariable Long productId) {
 		return reviewRepository.findByProductId(productId);
 	}
+
+	@PostMapping
+	public Review addReview(@PathVariable Long productId, @RequestBody ReviewInput input) {
+		var review = new Review(input.getGrade(), input.getComment(), productId);
+		return reviewRepository.save(review);
+	}
 }

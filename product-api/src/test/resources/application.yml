@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    url: jdbc:mysql://localhost:3306/aw_product_test?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: ''
+  jackson:
+    default-property-inclusion: always #always non_empty

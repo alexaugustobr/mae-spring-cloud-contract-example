@@ -2,6 +2,7 @@ package com.algaworks.example.product.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 public class Product {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private BigDecimal price;
@@ -19,6 +20,11 @@ public class Product {
 	}
 
 	public Product(String name, BigDecimal price) {
+		this(null, name, price);
+	}
+
+	public Product(Long id, String name, BigDecimal price) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
 	}

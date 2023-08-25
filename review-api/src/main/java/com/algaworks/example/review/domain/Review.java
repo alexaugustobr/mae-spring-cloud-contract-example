@@ -2,6 +2,7 @@ package com.algaworks.example.review.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.OffsetDateTime;
@@ -10,7 +11,7 @@ import java.time.OffsetDateTime;
 public class Review {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private OffsetDateTime createdAt = OffsetDateTime.now();
 	private Integer grade;

@@ -1,4 +1,4 @@
-package com.algaworks.example.product.api;
+package com.algaworks.example.product.api.model;
 
 import java.time.OffsetDateTime;
 

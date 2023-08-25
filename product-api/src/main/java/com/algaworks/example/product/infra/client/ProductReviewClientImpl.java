@@ -1,17 +1,14 @@
 package com.algaworks.example.product.infra.client;
 
-import com.algaworks.example.product.api.ProductReviewClient;
-import com.algaworks.example.product.api.ReviewModel;
+import com.algaworks.example.product.api.client.ProductReviewClient;
+import com.algaworks.example.product.api.model.ReviewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class ProductReviewClientImpl implements ProductReviewClient {
@@ -42,7 +39,11 @@ public class ProductReviewClientImpl implements ProductReviewClient {
 			avaliacoes = restTemplate.getForObject(requestUrl, ReviewModel[].class, parametros);
 		} catch (Exception e) {
 			logger.error("Erro ao buscar avaliações");
-			throw e;
+			return new ArrayList<>();
+		}
+
+		if (avaliacoes == null) {
+			return new ArrayList<>();
 		}
 
 		return Arrays.asList(avaliacoes);

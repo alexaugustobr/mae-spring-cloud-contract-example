@@ -1,30 +1,26 @@
-package com.algaworks.example.product.api;
+package com.algaworks.example.product.api.model;
 
 import com.algaworks.example.product.domain.Product;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ProductModel {
+public class ProductSummaryModel {
 
 	private Long id;
 	private String name;
 	private BigDecimal price;
-	
-	public List<ReviewModel> reviews = new ArrayList<>();
 
-	public ProductModel() {
+	public ProductSummaryModel() {
 	}
 
-	public ProductModel(Long id, String name, BigDecimal price) {
+	public ProductSummaryModel(Long id, String name, BigDecimal price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 	}
 
-	public static ProductModel of(Product product) {
-		return new ProductModel(
+	public static ProductSummaryModel of(Product product) {
+		return new ProductSummaryModel(
 				product.getId(),
 				product.getName(),
 				product.getPrice()
@@ -55,16 +51,4 @@ public class ProductModel {
 		this.price = price;
 	}
 
-	public List<ReviewModel> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<ReviewModel> reviews) {
-		this.reviews = reviews;
-	}
-
-	public ProductModel addReviews(List<ReviewModel> reviews) {
-		this.setReviews(reviews);
-		return this;
-	}
 }
