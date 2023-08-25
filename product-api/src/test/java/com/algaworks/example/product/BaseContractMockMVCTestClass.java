@@ -1,5 +1,6 @@
 package com.algaworks.example.product;
 
+import com.algaworks.example.product.api.client.ProductReviewClient;
 import com.algaworks.example.product.api.controller.ProductController;
 import com.algaworks.example.product.api.exceptionhandler.ApiExceptionHandler;
 import com.algaworks.example.product.domain.Product;
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -28,6 +30,9 @@ public class BaseContractMockMVCTestClass {
     @MockBean
     private ProductRepository productRepository;
 
+    @MockBean
+    private ProductReviewClient productReviewClient;
+
     @Autowired
     private ProductController productController;
 
@@ -39,6 +44,10 @@ public class BaseContractMockMVCTestClass {
 
     @BeforeEach
     public void setup() {
+        RestAssuredMockMvc.webAppContextSetup(context);
+
+        lenient().when(productReviewClient.findByProduct(1L)).thenReturn(new ArrayList<>());
+
         lenient().when(productRepository.saveAndFlush(any(Product.class))).then(s -> {
             var product = s.getArgument(0, Product.class);
             if (product.getId() == null) {
@@ -58,15 +67,5 @@ public class BaseContractMockMVCTestClass {
                         new Product(3L, "Microfone FT342", new BigDecimal("300.0"))
                 )
         );
-
-        RestAssuredMockMvc.webAppContextSetup(context);
-
-//        var standaloneMockMvcBuilder = MockMvcBuilders
-//                .standaloneSetup(productController)
-//                .setMessageConverters(new MappingJackson2HttpMessageConverter(
-//                        Jackson2ObjectMapperBuilder.json().build()
-//                ))
-//                .setControllerAdvice(new ApiExceptionHandler(Mockito.mock()));
-//        RestAssuredMockMvc.standaloneSetup(standaloneMockMvcBuilder);
     }
 }
