@@ -18,20 +18,26 @@ Contract.make {
     }
     response {
         status 201
-        body([
+        body([ //validacao de forma implicita
                 id: 1,
                 name: "Notebook Gamer RX76",
                 price: "1999.9",
                 reviews: []
         ])
-        bodyMatchers {
-            jsonPath('$.id', byRegex("^[0-9]*\$"))
-            jsonPath('$.name', byEquality())
-            jsonPath('$.price',byEquality())
-            jsonPath('$.reviews',byType({
-                        minOccurrence(0)
-                    })) //byNull
-        }
+//        body([ //validacao explicita
+//                id: anyNumber(),
+//                name: anyOf("Notebook Gamer RX76"),
+//                price: anyOf("1999.9"),
+//                reviews: []
+//        ])
+//        bodyMatchers { // geracao de stub dinamico
+//            jsonPath('$.id', byRegex("^[0-9]*\$"))
+//            jsonPath('$.name', anyIso8601WithOffset())
+//            jsonPath('$.price',byEquality())
+//            jsonPath('$.reviews',byType({
+//                        minOccurrence(0)
+//                    })) //byNull
+//        }
         headers {
             contentType("application/json")
         }

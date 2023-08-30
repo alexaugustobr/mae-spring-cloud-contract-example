@@ -1,4 +1,4 @@
-package com.algaworks.example.review.api;
+package com.algaworks.example.review.api.model;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

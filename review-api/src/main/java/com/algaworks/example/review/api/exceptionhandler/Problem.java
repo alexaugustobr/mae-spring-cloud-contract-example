@@ -1,7 +1,8 @@
-package com.algaworks.example.product.api.exceptionhandler;
+package com.algaworks.example.review.api.exceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.time.OffsetDateTime;
 import java.util.List;
 
