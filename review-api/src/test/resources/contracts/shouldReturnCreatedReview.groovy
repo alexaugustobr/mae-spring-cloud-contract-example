@@ -6,7 +6,7 @@ Contract.make {
     request {
         method POST() //'POST'
         headers {
-            contentType applicationJson() // 'application/json'
+            contentType applicationJson()
         }
         urlPath("/products/1/reviews")
         body(
@@ -18,12 +18,20 @@ Contract.make {
     }
     response {
         status 201
+        headers {
+            contentType applicationJson()
+        }
         body(
             [
-                id: anInteger(),
+                id: 1,
                 grade: 4,
                 comment: "Superou as expectativas."
             ]
         )
+        bodyMatchers {
+            jsonPath('$.id', byType())
+//            jsonPath('$.grade', byEquality())
+//            jsonPath('$.comment', byEquality())
+        }
     }
 }
