@@ -43,6 +43,10 @@ Contract.make {
             jsonPath('$.objects', byType {
                 maxOccurrence(2)
             })
+            jsonPath('$.objects[0].name', byType())
+            jsonPath('$.objects[1].name', byType())
+            jsonPath('$.objects[0].userMessage', byType())
+            jsonPath('$.objects[1].userMessage', byType())
         }
     }
 }

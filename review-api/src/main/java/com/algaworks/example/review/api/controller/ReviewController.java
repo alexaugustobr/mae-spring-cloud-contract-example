@@ -1,10 +1,12 @@
 package com.algaworks.example.review.api.controller;
 
+import com.algaworks.example.review.api.exceptionhandler.ApiExceptionHandler;
 import com.algaworks.example.review.api.model.ReviewInput;
 import com.algaworks.example.review.api.model.ReviewModel;
 import com.algaworks.example.review.domain.Review;
 import com.algaworks.example.review.domain.ReviewRepository;
 import jakarta.validation.Valid;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
