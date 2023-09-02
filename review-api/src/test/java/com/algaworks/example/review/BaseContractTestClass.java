@@ -24,7 +24,7 @@ import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.any;
 
-@ExtendWith(SpringExtension.class)
+//@ExtendWith(SpringExtension.class)
 @WebMvcTest
 public abstract class BaseContractTestClass {
 

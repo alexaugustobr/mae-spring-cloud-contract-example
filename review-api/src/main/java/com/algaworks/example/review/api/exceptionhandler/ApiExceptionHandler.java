@@ -1,6 +1,5 @@
 package com.algaworks.example.review.api.exceptionhandler;
 
-import com.algaworks.example.review.api.controller.ReviewController;
 import com.algaworks.example.review.api.exception.BusinessException;
 import com.algaworks.example.review.api.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
@@ -33,7 +32,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ControllerAdvice(basePackages = "com.algaworks.example")
+@ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ApiExceptionHandler.class);
