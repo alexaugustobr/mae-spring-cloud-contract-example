@@ -6,20 +6,27 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.OffsetDateTime;
+
 public class ReviewModel {
 
     private Long id;
     private Integer grade;
     private String comment;
+    private OffsetDateTime createdAt;
+    private Long productId;
 
-    public ReviewModel(Long id, Integer grade, String comment) {
+    public ReviewModel(Long id, Integer grade, String comment, OffsetDateTime createdAt, Long productId) {
         this.id = id;
         this.grade = grade;
         this.comment = comment;
+        this.createdAt = createdAt;
+        this.productId = productId;
     }
 
     public static ReviewModel of(Review review) {
-        return new ReviewModel(review.getId(), review.getGrade(), review.getComment());
+        return new ReviewModel(review.getId(), review.getGrade(),
+                review.getComment(), review.getCreatedAt(), review.getProductId());
     }
 
     public Long getId() {
@@ -44,5 +51,21 @@ public class ReviewModel {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

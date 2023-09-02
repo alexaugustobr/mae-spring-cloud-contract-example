@@ -21,6 +21,14 @@ public class Review {
 	public Review() {
 	}
 
+	public Review(Long id, OffsetDateTime createdAt, Integer grade, String comment, Long productId) {
+		this.id = id;
+		this.createdAt = createdAt;
+		this.grade = grade;
+		this.comment = comment;
+		this.productId = productId;
+	}
+
 	public Review(Integer grade, String comment, Long productId) {
 		this.grade = grade;
 		this.comment = comment;

@@ -4,6 +4,7 @@ import com.algaworks.example.review.api.model.ReviewInput;
 import com.algaworks.example.review.api.model.ReviewModel;
 import com.algaworks.example.review.domain.Review;
 import com.algaworks.example.review.domain.ReviewRepository;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class ReviewController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ReviewModel addReview(@PathVariable Long productId, @RequestBody ReviewInput input) {
+	public ReviewModel addReview(@PathVariable Long productId, @RequestBody  @Valid ReviewInput input) {
 		var review = new Review(input.getGrade(), input.getComment(), productId);
 		return ReviewModel.of(reviewRepository.save(review));
 	}

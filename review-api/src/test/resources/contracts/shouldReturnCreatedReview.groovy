@@ -23,15 +23,19 @@ Contract.make {
         }
         body(
             [
-                id: 1,
+                id: 1, //1 Será apresentado no stub, podemos usar anyPositiveInt
                 grade: 4,
-                comment: "Superou as expectativas."
+                comment: "Superou as expectativas.",
+                createdAt: iso8601WithOffset(),
+                productId: 1
             ]
         )
         bodyMatchers {
             jsonPath('$.id', byType())
-//            jsonPath('$.grade', byEquality())
-//            jsonPath('$.comment', byEquality())
+////            jsonPath('$.grade', byEquality())
+////            jsonPath('$.comment', byEquality())
+//            jsonPath('$.createdAt', byRegex(iso8601WithOffset()))
+////            jsonPath('$.productId', byEquality())
         }
     }
 }
