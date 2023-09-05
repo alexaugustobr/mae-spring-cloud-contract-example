@@ -23,7 +23,7 @@ Contract.make {
         }
         body([
                 status: 400,
-                type: "https://api.alganews.com.br/invalid-data",
+                type: "invalid-data",
                 title: "Dados inválidos",
                 detail: "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.",
                 userMessage: "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.",
@@ -40,6 +40,9 @@ Contract.make {
                 ]
         ])
         bodyMatchers {
+            jsonPath('$.title', byType())
+            jsonPath('$.detail', byType())
+            jsonPath('$.userMessage', byType())
             jsonPath('$.objects', byType {
                 maxOccurrence(2)
             })

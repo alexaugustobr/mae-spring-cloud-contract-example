@@ -18,7 +18,7 @@ public enum ProblemType {
 	private final HttpStatus status;
 
 	ProblemType(String path, String title, HttpStatus status) {
-		this.uri = "https://api.alganews.com.br" + path;
+		this.uri = path;
 		this.title = title;
 		this.status = status;
 	}

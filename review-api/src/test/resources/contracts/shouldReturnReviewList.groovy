@@ -7,7 +7,7 @@ Contract.make {
         method GET()
         url '/products/1/reviews'
         headers {
-            contentType applicationJson()
+            accept applicationJson()
         }
     }
     response {
@@ -19,21 +19,21 @@ Contract.make {
                 [
                         id: 1,
                         comment: "Adorei o produto",
-                        createdAt: iso8601WithOffset(),
+                        createdAt: anyIso8601WithOffset(),
                         grade: 5,
                         productId: 1
                 ],
                 [
                         id: 2,
                         comment: "Bom custo-benefício",
-                        createdAt: iso8601WithOffset(),
+                        createdAt: anyIso8601WithOffset(), //Usar esse, retorna o valor
                         grade: 4,
                         productId: 1
                 ],
                 [
                         id: 3,
                         comment: "Esperava mais do produto",
-                        createdAt: iso8601WithOffset(),
+                        createdAt: iso8601WithOffset(), //Não usar esse, retorna o REGEX
                         grade: 3,
                         productId: 1
                 ]
