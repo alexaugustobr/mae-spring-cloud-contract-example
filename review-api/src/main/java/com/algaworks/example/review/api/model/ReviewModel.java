@@ -14,19 +14,17 @@ public class ReviewModel {
     private Integer grade;
     private String comment;
     private OffsetDateTime createdAt;
-    private Long productId;
 
-    public ReviewModel(Long id, Integer grade, String comment, OffsetDateTime createdAt, Long productId) {
+    public ReviewModel(Long id, Integer grade, String comment, OffsetDateTime createdAt) {
         this.id = id;
         this.grade = grade;
         this.comment = comment;
         this.createdAt = createdAt;
-        this.productId = productId;
     }
 
     public static ReviewModel of(Review review) {
         return new ReviewModel(review.getId(), review.getGrade(),
-                review.getComment(), review.getCreatedAt(), review.getProductId());
+                review.getComment(), review.getCreatedAt());
     }
 
     public Long getId() {
@@ -59,13 +57,5 @@ public class ReviewModel {
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
     }
 }

@@ -8,13 +8,32 @@ Contract.make {
         headers {
             contentType applicationJson()
         }
-        urlPath("/products/1/reviews")
+        urlPath value(
+                    stub(regex("^\\/products\\/[1-9]\\d*\\/reviews\$")), //Qualquer positivo
+                    test("/products/1/reviews")
+        )
         body(
             [
-                grade: 4,
-                comment: "Superou as expectativas."
+                grade: value(  // value ou $
+                        stub(regex('[1-5]')), //Valor que vai para regex de request do stub
+                        test("2") //Valor fixo que vai para o teste de contrato
+                ),
+                comment: $(
+                        stub(nonBlank()),
+                        test("Superou as expectativas.")
+                )
             ]
         )
+//        body(
+//            [
+//                    grade: 2,
+//                    comment: "Superou as expectativas."
+//            ]
+//        )
+//        bodyMatchers {
+//            jsonPath('$.grade', byRegex('[1-5]'))
+//            jsonPath('$.comment', byRegex(nonBlank()))
+//        }
     }
     response {
         status 201
@@ -24,14 +43,13 @@ Contract.make {
         body(
             [
                 id: 1, //1 Será apresentado no stub, podemos usar anyPositiveInt
-                grade: 4,
-                comment: "Superou as expectativas.",
-                createdAt: iso8601WithOffset(),
-                productId: 1
+                grade: fromRequest().body('$.grade'),
+                comment: fromRequest().body('$.comment'),
+                createdAt: anyIso8601WithOffset()
             ]
         )
         bodyMatchers {
-            jsonPath('$.id', byType())
+            jsonPath('$.id', byRegex(positiveInt()))
 ////            jsonPath('$.grade', byEquality())
 ////            jsonPath('$.comment', byEquality())
 //            jsonPath('$.createdAt', byRegex(iso8601WithOffset()))
