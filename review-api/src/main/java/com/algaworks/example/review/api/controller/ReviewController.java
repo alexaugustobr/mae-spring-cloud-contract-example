@@ -32,7 +32,7 @@ public class ReviewController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ReviewModel addReview(@PathVariable Long productId, @RequestBody  @Valid ReviewInput input) {
-		var review = new Review(input.getGrade(), input.getComment(), productId);
+		var review = new Review(input.getGrade(), input.getComment(), input.getName(), productId);
 		return ReviewModel.of(reviewRepository.save(review));
 	}
 }

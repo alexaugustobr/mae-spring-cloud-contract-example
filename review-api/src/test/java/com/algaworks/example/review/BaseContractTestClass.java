@@ -55,9 +55,9 @@ public abstract class BaseContractTestClass {
         });
 
         Mockito.when(reviewRepository.findByProductId(1L)).thenReturn(Arrays.asList(
-                new Review(1L,  OffsetDateTime.now().minusDays(2), 5, "Adorei o produto", 1L),
-                new Review(2L,  OffsetDateTime.now().minusDays(1), 4, "Bom custo-benefício", 1L),
-                new Review(3L,  OffsetDateTime.now(), 3, "Esperava mais do produto", 1L)
+                new Review(1L,  OffsetDateTime.now().minusDays(2), 5, "Adorei o produto", "Alex", 1L),
+                new Review(2L,  OffsetDateTime.now().minusDays(1), 4, "Bom custo-benefício", null, 1L),
+                new Review(3L,  OffsetDateTime.now(), 3, "Esperava mais do produto", "Maria", 1L)
         ));
 
 //        var mockMvc = MockMvcBuilders.standaloneSetup(reviewController)

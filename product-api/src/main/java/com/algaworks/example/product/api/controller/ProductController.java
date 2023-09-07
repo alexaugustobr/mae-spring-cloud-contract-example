@@ -6,6 +6,9 @@ import com.algaworks.example.product.api.model.ProductInputModel;
 import com.algaworks.example.product.api.model.ProductModel;
 import com.algaworks.example.product.api.model.ProductSummaryModel;
 import com.algaworks.example.product.domain.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +29,8 @@ public class ProductController {
 	}
 
 	@GetMapping
-	public List<ProductSummaryModel> findAll() {
-		return products.findAll()
-				.stream()
-				.map(ProductSummaryModel::of)
-				.collect(Collectors.toList());
+	public Page<ProductSummaryModel> findAll(@PageableDefault Pageable pageable) {
+		return products.findAll(pageable).map(ProductSummaryModel::of);
 	}
 
 	@PostMapping

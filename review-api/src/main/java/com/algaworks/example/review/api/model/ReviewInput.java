@@ -14,6 +14,8 @@ public class ReviewInput {
     @NotBlank
     private String comment;
 
+    private String name;
+
     public Integer getGrade() {
         return grade;
     }
@@ -28,5 +30,13 @@ public class ReviewInput {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

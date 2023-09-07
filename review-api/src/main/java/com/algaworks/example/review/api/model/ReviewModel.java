@@ -1,10 +1,6 @@
 package com.algaworks.example.review.api.model;
 
 import com.algaworks.example.review.domain.Review;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.OffsetDateTime;
 
@@ -14,17 +10,19 @@ public class ReviewModel {
     private Integer grade;
     private String comment;
     private OffsetDateTime createdAt;
+    private String name;
 
-    public ReviewModel(Long id, Integer grade, String comment, OffsetDateTime createdAt) {
+    public ReviewModel(Long id, Integer grade, String comment, OffsetDateTime createdAt, String name) {
         this.id = id;
         this.grade = grade;
         this.comment = comment;
         this.createdAt = createdAt;
+        this.name = name;
     }
 
     public static ReviewModel of(Review review) {
         return new ReviewModel(review.getId(), review.getGrade(),
-                review.getComment(), review.getCreatedAt());
+                review.getComment(), review.getCreatedAt(), review.getName());
     }
 
     public Long getId() {
@@ -57,5 +55,13 @@ public class ReviewModel {
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

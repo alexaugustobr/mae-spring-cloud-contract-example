@@ -16,22 +16,25 @@ public class Review {
 	private OffsetDateTime createdAt = OffsetDateTime.now();
 	private Integer grade;
 	private String comment;
+	private String name;
 	private Long productId;
 
 	public Review() {
 	}
 
-	public Review(Long id, OffsetDateTime createdAt, Integer grade, String comment, Long productId) {
+	public Review(Long id, OffsetDateTime createdAt, Integer grade, String comment, String name, Long productId) {
 		this.id = id;
 		this.createdAt = createdAt;
 		this.grade = grade;
 		this.comment = comment;
+		this.name = name;
 		this.productId = productId;
 	}
 
-	public Review(Integer grade, String comment, Long productId) {
+	public Review(Integer grade, String comment, String name, Long productId) {
 		this.grade = grade;
 		this.comment = comment;
+		this.name = name;
 		this.productId = productId;
 	}
 
@@ -65,6 +68,14 @@ public class Review {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Long getProductId() {

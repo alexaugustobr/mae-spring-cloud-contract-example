@@ -4,7 +4,7 @@ import org.springframework.cloud.contract.spec.Contract
 
 Contract.make {
     request {
-        priority(50)
+        priority(100)
         method POST()
         headers {
             contentType applicationJson()
@@ -22,10 +22,6 @@ Contract.make {
                 comment: $(
                         stub(nonBlank()),
                         test("Superou as expectativas.")
-                ),
-                name: $(
-                        stub(optional(nonBlank())),
-                        test("Alex")
                 )
             ]
         )
@@ -40,12 +36,13 @@ Contract.make {
                 id: 1,
                 grade: fromRequest().body('$.grade'),
                 comment: fromRequest().body('$.comment'),
-                name: fromRequest().body('$.name'),
+                name: null,
                 createdAt: anyIso8601WithOffset()
             ]
         )
         bodyMatchers {
             jsonPath('$.id', byRegex(positiveInt()))
+            jsonPath('$.name', byNull())
         }
     }
 }
