@@ -22,7 +22,7 @@ Contract.make {
             jsonPath('$.price', byEquality())
         }
         headers {
-            contentType("application/json")
+            contentType applicationJson()
         }
     }
 }

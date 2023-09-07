@@ -1,5 +1,16 @@
 # Executando stub local
 
+## Compilar e colocar artefato na m2
+```bash
+mvn clean install
+```
+
+## Apenas gerar
+```bash
+mvn org.springframework.cloud:spring-cloud-contract-maven-plugin:convert
+```
+
+
 ## Download do runner jar
 ```bash
 wget https://repo1.maven.org/maven2/org/springframework/cloud/spring-cloud-contract-stub-runner-boot/4.0.4/spring-cloud-contract-stub-runner-boot-4.0.4.jar

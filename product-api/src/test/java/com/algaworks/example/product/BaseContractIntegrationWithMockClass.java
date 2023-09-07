@@ -17,10 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
@@ -39,6 +36,10 @@ public class BaseContractIntegrationWithMockClass {
 
 //    public static Long EXISTING_PRODUCT_ID = 1L;
 //    public static Long NON_EXISTING_PRODUCT_ID = 9999L;
+
+    public String generateToken() {
+        return UUID.randomUUID().toString();
+    }
 
     @BeforeEach
     public void setup() {
