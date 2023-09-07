@@ -46,13 +46,13 @@ public class BaseContractIntegrationWithMockClass {
 
         Mockito.when(productReviewClient.findByProduct(1L)).thenReturn(new ArrayList<>());
 
-//        lenient().when(productRepository.saveAndFlush(any(Product.class))).then(s -> {
-//            var product = s.getArgument(0, Product.class);
-//            if (product.getId() == null) {
-//                product.setId(EXISTING_PRODUCT_ID);
-//            }
-//            return product;
-//        });
+        lenient().when(productRepository.saveAndFlush(any(Product.class))).then(s -> {
+            var product = s.getArgument(0, Product.class);
+            if (product.getId() == null) {
+                product.setId(1L);
+            }
+            return product;
+        });
 //        lenient().when(productRepository.findById(1L)).thenReturn(
 //                Optional.of(new Product(EXISTING_PRODUCT_ID, "Notebook Gamer RX76", new BigDecimal("1999.9")))
 //        );
