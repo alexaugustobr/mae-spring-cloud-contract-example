@@ -58,21 +58,21 @@ public class BaseContractIntegrationWithMockClass {
 //        );
 //        lenient().when(productRepository.findById(NON_EXISTING_PRODUCT_ID)).thenReturn(Optional.empty());
 //
-//        List<Product> products = Arrays.asList(
-//                new Product(EXISTING_PRODUCT_ID, "Notebook Gamer RX76", new BigDecimal("1999.9")),
-//                new Product(2L, "Monitor 22p", new BigDecimal("1500.0")),
-//                new Product(3L, "Microfone FT342", new BigDecimal("300.0"))
-//        );
-//
-//        lenient().when(productRepository.findAll(any(Pageable.class))).thenAnswer(a -> {
-//            var pageable = a.getArgument(0, Pageable.class);
-//            List<Product> productsOnPage;
-//            if (products.size() > pageable.getPageSize()) {
-//                productsOnPage = products.subList(0, pageable.getPageSize());
-//            } else {
-//                productsOnPage = products;
-//            }
-//            return new PageImpl<>(productsOnPage, pageable, products.size());
-//        });
+        var products = Arrays.asList(
+                new Product(1L, "Notebook Gamer RX76", new BigDecimal("1999.9")),
+                new Product(2L, "Monitor 22p", new BigDecimal("1500.0")),
+                new Product(3L, "Microfone FT342", new BigDecimal("300.0"))
+        );
+
+        Mockito.when(productRepository.findAll(any(Pageable.class))).thenAnswer(a -> {
+            var pageable = a.getArgument(0, Pageable.class);
+            List<Product> productsOnPage;
+            if (products.size() > pageable.getPageSize()) {
+                productsOnPage = products.subList(0, pageable.getPageSize());
+            } else {
+                productsOnPage = products;
+            }
+            return new PageImpl<>(productsOnPage, pageable, products.size());
+        });
     }
 }

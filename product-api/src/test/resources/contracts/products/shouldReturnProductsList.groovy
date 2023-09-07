@@ -1,18 +1,12 @@
-
+package contracts.products
 
 import org.springframework.cloud.contract.spec.Contract
 
 Contract.make {
-    description "Deve retornar lista de produtos com filtro" //Opcional
+    description "Deve retornar lista de produtos" //Opcional
     request{
-        method GET() //Deve passar urlPath ou url, nunca ambos,
-        // url pode ser apenas o path, mas o idela se for usar url que seja completa como http://localhost:8080/produtos
-        urlPath("/products") {
-            queryParameters {
-                parameter('size', value(stub(2), test(2)))
-                parameter('number', value(stub(0), test(0)))
-            }
-        }
+        method GET()
+        urlPath("/products")
         headers {
             accept applicationJson()
         }
@@ -30,12 +24,17 @@ Contract.make {
                                 id: 2,
                                 name: "Monitor 22p",
                                 price: "1500.0"
+                        ],
+                        [
+                                id: 3,
+                                name: "Microfone FT342",
+                                price: "300.0"
                         ]
                 ],
-                size: fromRequest().query("size"),
+                size: 10,
                 totalElements: 3,
-                totalPages: 2,
-                number: fromRequest().query("number")
+                totalPages: 1,
+                number: 0
         ])
         bodyMatchers {
             jsonPath('$.size', byEquality())
@@ -48,6 +47,9 @@ Contract.make {
             jsonPath('$.content.[1].id', byEquality())
             jsonPath('$.content.[1].name', byEquality())
             jsonPath('$.content.[1].price', byEquality())
+            jsonPath('$.content.[2].id', byEquality())
+            jsonPath('$.content.[2].name', byEquality())
+            jsonPath('$.content.[2].price', byEquality())
         }
         headers {
             contentType applicationJson()
