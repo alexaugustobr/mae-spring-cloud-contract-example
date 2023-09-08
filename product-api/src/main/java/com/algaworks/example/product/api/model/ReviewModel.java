@@ -5,18 +5,20 @@ import java.time.OffsetDateTime;
 public class ReviewModel {
 
 	private Long id;
-	private OffsetDateTime createdAt = OffsetDateTime.now();
 	private Integer grade;
 	private String comment;
-	private Long productId;
+	private OffsetDateTime createdAt;
+	private String name;
 
 	public ReviewModel() {
 	}
 
-	public ReviewModel(Integer grade, String comment, Long productId) {
+	public ReviewModel(Long id, Integer grade, String comment, OffsetDateTime createdAt, String name) {
+		this.id = id;
 		this.grade = grade;
 		this.comment = comment;
-		this.productId = productId;
+		this.createdAt = createdAt;
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -25,14 +27,6 @@ public class ReviewModel {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public OffsetDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(OffsetDateTime createdAt) {
-		this.createdAt = createdAt;
 	}
 
 	public Integer getGrade() {
@@ -51,11 +45,19 @@ public class ReviewModel {
 		this.comment = comment;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setCreatedAt(OffsetDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
