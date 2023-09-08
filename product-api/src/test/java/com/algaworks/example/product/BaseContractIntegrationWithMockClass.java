@@ -4,16 +4,25 @@ import com.algaworks.example.product.api.client.ProductReviewClient;
 import com.algaworks.example.product.api.controller.ProductController;
 import com.algaworks.example.product.domain.Product;
 import com.algaworks.example.product.domain.ProductRepository;
+import com.algaworks.example.product.security.BasicSecurityConfig;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
@@ -21,8 +30,12 @@ import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
 @WebMvcTest
+@ActiveProfiles("security-basic") //Força ativação do profile
+@Import(BasicSecurityConfig.class) //Importa configuração pois o @WebMvcTest não está carregando, dando erro de CSRF no post
+@WithMockUser(username = "admin", password = "123456", roles = "ADMIN")
 public class BaseContractIntegrationWithMockClass {
 
     @MockBean
@@ -32,7 +45,10 @@ public class BaseContractIntegrationWithMockClass {
     private ProductReviewClient productReviewClient;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
+
+//    @Autowired
+//    private WebApplicationContext context;
 
 //    public static Long EXISTING_PRODUCT_ID = 1L;
 //    public static Long NON_EXISTING_PRODUCT_ID = 9999L;
@@ -77,3 +93,5 @@ public class BaseContractIntegrationWithMockClass {
         });
     }
 }
+
+
