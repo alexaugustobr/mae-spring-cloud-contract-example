@@ -103,6 +103,12 @@
 					<baseClassForTests>
 						com.algaworks.example.product.BaseContractIntegrationWithMockClass
 					</baseClassForTests>
+					<baseClassMappings>
+						<baseClassMapping>
+							<contractPackageRegex>.*products.*</contractPackageRegex>
+							<baseClassFQN>com.algaworks.example.product.BaseContractIntegration</baseClassFQN>
+						</baseClassMapping>
+					</baseClassMappings>
 				</configuration>
 			</plugin>
 		</plugins>
