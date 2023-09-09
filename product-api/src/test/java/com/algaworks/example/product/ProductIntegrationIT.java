@@ -7,6 +7,7 @@ import com.algaworks.example.product.security.BasicSecurityConfig;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.RestAssured;
+import io.restassured.internal.http.HTTPBuilder;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import io.restassured.response.ResponseOptions;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(MockitoExtension.class)
-//@ActiveProfiles("security-basic")
+@ActiveProfiles("security-basic")
 @AutoConfigureStubRunner(ids = {"com.algaworks.example:review-api:+:8082"}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 public class ProductIntegrationIT {
 
@@ -47,7 +48,6 @@ public class ProductIntegrationIT {
     public void setup() {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         RestAssured.port = port;
-        RestAssured.basic("admin", "123456");
         RestAssured.basePath = "/products";
         //Já que é integração vamos testar tudo, unico mock é o BD, por questões de facilitar o mock de dependnencias externas
         Mockito.when(productRepository.findById(1L)).thenReturn(
@@ -58,7 +58,7 @@ public class ProductIntegrationIT {
     @Test
     public void shouldReturnFoundProductByIdWithComments()  throws Exception {
         // given:
-        var request = given();
+        var request = given().auth().basic("admin", "123456");
 
         // when:
         var response = given().spec(request).get("/1");
